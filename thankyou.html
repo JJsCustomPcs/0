@@ -6,69 +6,39 @@
   <title>Thank You - JJ's Custom PCs</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
-    html { scroll-behavior: smooth; }
-
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
       background-color: #0d0d0d;
       color: #e0e0e0;
-      line-height: 1.6;
-    }
-
-    header {
-      background: #111;
-      padding: 1.5rem 3rem;
       text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
-      color: #00bfff;
-    }
-
-    nav {
-      margin-top: 0.5rem;
-    }
-
-    nav a {
-      margin: 0 1rem;
-      color: #e0e0e0;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #00bfff;
-    }
-
-    .thankyou-section {
-      max-width: 700px;
-      margin: 6rem auto;
-      padding: 3rem;
+    .thankyou-box {
       background: #1a1a1a;
+      padding: 3rem;
       border-radius: 12px;
       box-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
-      text-align: center;
+      max-width: 600px;
     }
 
-    .thankyou-section h1 {
+    h1 {
       color: #00bfff;
       margin-bottom: 1rem;
       font-size: 2.5rem;
     }
 
-    .thankyou-section p {
-      font-size: 1.2rem;
+    p {
+      font-size: 1.1rem;
       margin-bottom: 2rem;
     }
 
-    .thankyou-section a {
+    a {
       display: inline-block;
       background: #00bfff;
       color: white;
@@ -78,42 +48,17 @@
       transition: background 0.3s;
     }
 
-    .thankyou-section a:hover {
+    a:hover {
       background: #008cba;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      background: #111;
-      font-size: 0.9rem;
-      color: #aaa;
-      margin-top: 3rem;
     }
   </style>
 </head>
 <body>
-
-<header>
-  <h1>JJ's Custom PCs</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="services.html">Services</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-</header>
-
-<section class="thankyou-section">
-  <h1>Thank You!</h1>
-  <p>Your request has been successfully submitted. I’ll review it and get back to you as soon as possible.</p>
-  <a href="index.html">Return to Home</a>
-</section>
-
-<footer>
-  <p>© 2025 JJ's Custom PCs. All Rights Reserved.</p>
-</footer>
-
+  <div class="thankyou-box">
+    <h1>Thank You!</h1>
+    <p>Your request has been successfully submitted. I’ll review it and get back to you as soon as possible.</p>
+    <a href="index.html">Return to Home</a>
+  </div>
 </body>
 </html>
 
