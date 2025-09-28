@@ -1,4 +1,208 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>JJ's Custom PCs</title> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet"> <style> html { scroll-behavior: smooth; } body { margin: 0; font-family: 'Poppins', sans-serif; background-color: #0d0d0d; color: #e0e0e0; line-height: 1.6; } header { background: #111; padding: 1.5rem 3rem; text-align: center; position: sticky; top: 0; z-index: 1000; } header h1 { margin: 0; font-size: 2rem; color: #00bfff; } nav { margin-top: 0.5rem; } nav a { margin: 0 1rem; color: #e0e0e0; text-decoration: none; font-weight: 500; transition: color 0.3s; } nav a:hover { color: #00bfff; } section { max-width: 900px; margin: 4rem auto; padding: 2rem; background: #1a1a1a; border-radius: 10px; box-shadow: 0 0 20px rgba(0, 191, 255, 0.1); transition: transform 0.2s; } section:hover { transform: translateY(-3px); } h2 { color: #00bfff; margin-bottom: 1rem; } p { margin-bottom: 1rem; } .quote-intro { background: #111; padding: 20px; border-radius: 10px; margin-bottom: 2rem; text-align: center; box-shadow: 0 0 15px rgba(0, 191, 255, 0.1); } .quote-form label { display: block; margin: 10px 0 5px; font-weight: bold; } .quote-form input, .quote-form select, .quote-form textarea { width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc; } .quote-form button { background: #00bfff; color: white; padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-size: 1rem; transition: background 0.3s; } .quote-form button:hover { background: #008cba; } footer { text-align: center; padding: 2rem; background: #111; font-size: 0.9rem; color: #aaa; margin-top: 3rem; } </style> </head> <body> <header> <h1>JJ's Custom PCs</h1> <nav> <a href="index.html">Home</a> <a href="about.html">About</a> <a href="services.html">Services</a> <a href="contact.html">Contact</a> </nav> </header> <!-- Intro Section --> <section class="quote-intro"> <h2>Welcome to JJ's Custom PCs!</h2> <p>Whether you're looking for a high-performance gaming rig, a budget-friendly workstation, or just need guidance on building the perfect PC, you're in the right place. Fill out the quote form below and let me know your goals — I’ll handle the rest!</p> </section> <!-- Home Section with Quote Form --> <section> <h2>Get a Quote</h2> <div class="quote-form"> <!-- FormSubmit integration --> <form action="https://formsubmit.co/a3b58795bc0ec2a0644d6798de47715b" method="POST"> <!-- Redirect to thankyou.html --> <input type="hidden" name="_next" value="thankyou.html"> <!-- Disable CAPTCHA (optional) --> <input type="hidden" name="_captcha" value="false"> <label for="name">Name:</label> <input type="text" id="name" name="name" placeholder="Your Name" required> <label for="email">Email:</label> <input type="email" id="email" name="email" placeholder="Your Email" required> <label for="build-type">Build Type:</label> <select id="build-type" name="build-type"> <option value="general">General (Budget + Needs)</option> <option value="specific">Specific (Parts List)</option> </select> <div id="general-fields"> <label for="budget">Budget ($):</label> <input type="number" id="budget" name="budget" placeholder="Enter your budget"> <label for="use-case">Use Case:</label> <select id="use-case" name="use-case"> <option>Gaming</option> <option>Video Editing</option> <option>Streaming</option> <option>General Use</option> <option>Other</option> </select> </div> <div id="specific-fields" style="display:none;"> <label for="parts">Parts List:</label> <textarea id="parts" name="parts" rows="6" placeholder="Paste your parts list here..."></textarea> </div> <button type="submit">Submit Quote Request</button> </form> </div> </section> <footer> <p>© 2025 JJ's Custom PCs. All Rights Reserved.</p> </footer> <script> const buildType = document.getElementById('build-type'); const generalFields = document.getElementById('general-fields'); const specificFields = document.getElementById('specific-fields'); buildType.addEventListener('change', () => { if (buildType.value === 'general') { generalFields.style.display = 'block'; specificFields.style.display = 'none'; } else { generalFields.style.display = 'none'; specificFields.style.display = 'block'; } }); </script> </body> </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JJ's Custom PCs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #0d0d0d;
+      color: #e0e0e0;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #111;
+      padding: 1.5rem 3rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: #00bfff;
+    }
+
+    nav {
+      margin-top: 0.5rem;
+    }
+
+    nav a {
+      margin: 0 1rem;
+      color: #e0e0e0;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #00bfff;
+    }
+
+    section {
+      max-width: 900px;
+      margin: 4rem auto;
+      padding: 2rem;
+      background: #1a1a1a;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 191, 255, 0.1);
+      transition: transform 0.2s;
+    }
+
+    section:hover {
+      transform: translateY(-3px);
+    }
+
+    h2 {
+      color: #00bfff;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    .quote-intro {
+      background: #111;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0, 191, 255, 0.1);
+    }
+
+    .quote-form label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+
+    .quote-form input, .quote-form select, .quote-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .quote-form button {
+      background: #00bfff;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+
+    .quote-form button:hover {
+      background: #008cba;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #111;
+      font-size: 0.9rem;
+      color: #aaa;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>JJ's Custom PCs</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<!-- Intro Section -->
+<section class="quote-intro">
+  <h2>Welcome to JJ's Custom PCs!</h2>
+  <p>Whether you're looking for a high-performance gaming rig, a budget-friendly workstation, or just need guidance on building the perfect PC, you're in the right place. Fill out the quote form below and let me know your goals — I’ll handle the rest!</p>
+</section>
+
+<!-- Quote Form Section -->
+<section>
+  <h2>Get a Quote</h2>
+  <div class="quote-form">
+    <form action="https://formsubmit.co/a3b58795bc0ec2a0644d6798de47715b" method="POST">
+      <!-- Redirect to thankyou.html -->
+      <input type="hidden" name="_next" value="https://jjscustompcs.github.io/thankyou.html">
+      <input type="hidden" name="_captcha" value="false">
+
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" placeholder="Your Name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Your Email" required>
+
+      <label for="build-type">Build Type:</label>
+      <select id="build-type" name="build-type">
+        <option value="general">General (Budget + Needs)</option>
+        <option value="specific">Specific (Parts List)</option>
+      </select>
+
+      <div id="general-fields">
+        <label for="budget">Budget ($):</label>
+        <input type="number" id="budget" name="budget" placeholder="Enter your budget">
+        
+        <label for="use-case">Use Case:</label>
+        <select id="use-case" name="use-case">
+          <option>Gaming</option>
+          <option>Video Editing</option>
+          <option>Streaming</option>
+          <option>General Use</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div id="specific-fields" style="display:none;">
+        <label for="parts">Parts List:</label>
+        <textarea id="parts" name="parts" rows="6" placeholder="Paste your parts list here..."></textarea>
+      </div>
+
+      <button type="submit">Submit Quote Request</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 JJ's Custom PCs. All Rights Reserved.</p>
+</footer>
+
+<script>
+  const buildType = document.getElementById('build-type');
+  const generalFields = document.getElementById('general-fields');
+  const specificFields = document.getElementById('specific-fields');
+
+  buildType.addEventListener('change', () => {
+    if (buildType.value === 'general') {
+      generalFields.style.display = 'block';
+      specificFields.style.display = 'none';
+    } else {
+      generalFields.style.display = 'none';
+      specificFields.style.display = 'block';
+    }
+  });
+</script>
+</body>
+</html>
+
 
 
 
