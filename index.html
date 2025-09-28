@@ -7,7 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
     html { scroll-behavior: smooth; }
-
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
@@ -15,7 +14,6 @@
       color: #e0e0e0;
       line-height: 1.6;
     }
-
     header {
       background: #111;
       padding: 1.5rem 3rem;
@@ -24,17 +22,14 @@
       top: 0;
       z-index: 1000;
     }
-
     header h1 {
       margin: 0;
       font-size: 2rem;
       color: #00bfff;
     }
-
     nav {
       margin-top: 0.5rem;
     }
-
     nav a {
       margin: 0 1rem;
       color: #e0e0e0;
@@ -42,11 +37,9 @@
       font-weight: 500;
       transition: color 0.3s;
     }
-
     nav a:hover {
       color: #00bfff;
     }
-
     section {
       max-width: 900px;
       margin: 4rem auto;
@@ -56,20 +49,16 @@
       box-shadow: 0 0 20px rgba(0, 191, 255, 0.1);
       transition: transform 0.2s;
     }
-
     section:hover {
       transform: translateY(-3px);
     }
-
     h2 {
       color: #00bfff;
       margin-bottom: 1rem;
     }
-
     p {
       margin-bottom: 1rem;
     }
-
     .quote-intro {
       background: #111;
       padding: 20px;
@@ -78,13 +67,11 @@
       text-align: center;
       box-shadow: 0 0 15px rgba(0, 191, 255, 0.1);
     }
-
     .quote-form label {
       display: block;
       margin: 10px 0 5px;
       font-weight: bold;
     }
-
     .quote-form input, .quote-form select, .quote-form textarea {
       width: 100%;
       padding: 10px;
@@ -92,7 +79,6 @@
       border-radius: 6px;
       border: 1px solid #ccc;
     }
-
     .quote-form button {
       background: #00bfff;
       color: white;
@@ -103,11 +89,9 @@
       font-size: 1rem;
       transition: background 0.3s;
     }
-
     .quote-form button:hover {
       background: #008cba;
     }
-
     footer {
       text-align: center;
       padding: 2rem;
@@ -130,19 +114,16 @@
   </nav>
 </header>
 
-<!-- Intro Section -->
 <section class="quote-intro">
   <h2>Welcome to JJ's Custom PCs!</h2>
   <p>Whether you're looking for a high-performance gaming rig, a budget-friendly workstation, or just need guidance on building the perfect PC, you're in the right place. Fill out the quote form below and let me know your goals — I’ll handle the rest!</p>
 </section>
 
-<!-- Quote Form Section -->
 <section>
   <h2>Get a Quote</h2>
   <div class="quote-form">
     <form action="https://formsubmit.co/a3b58795bc0ec2a0644d6798de47715b" method="POST">
-      <!-- Redirect to thankyou.html -->
-      <input type="hidden" name="_next" value="https://jjscustompcs.github.io/thankyou.html">
+      <input type="hidden" name="_next" value="https://jjscustompcs.github.io/0/thankyou.html">
       <input type="hidden" name="_captcha" value="false">
 
       <label for="name">Name:</label>
@@ -160,7 +141,7 @@
       <div id="general-fields">
         <label for="budget">Budget ($):</label>
         <input type="number" id="budget" name="budget" placeholder="Enter your budget">
-        
+
         <label for="use-case">Use Case:</label>
         <select id="use-case" name="use-case">
           <option>Gaming</option>
@@ -202,6 +183,7 @@
 </script>
 </body>
 </html>
+
 
 
 
