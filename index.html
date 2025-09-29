@@ -1,236 +1,418 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>JJ's Custom PCs</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <meta name="color-scheme" content="dark">
   <style>
+    :root{
+      --bg:#0d0d0d;
+      --panel:#111;
+      --card:#1a1a1a;
+      --accent:#00bfff;
+      --muted:#aaa;
+      --glass: rgba(255,255,255,0.03);
+    }
+
     html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: #0d0d0d;
+    body{
+      margin:0;
+      font-family:'Poppins',sans-serif;
+      background:var(--bg);
       color: #e0e0e0;
-      line-height: 1.6;
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
-    header {
-      background: #111;
-      padding: 1.5rem 3rem;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+
+    /* Header */
+    header{
+      background:var(--panel);
+      padding:1rem 2rem;
+      position:sticky;
+      top:0;
+      z-index:1200;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:16px;
     }
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
-      color: #00bfff;
+    header .inner {
+      width:100%;
+      max-width:1100px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
     }
-    nav {
-      margin-top: 0.5rem;
+    /* mini-logo (hidden until scroll) */
+    #mini-logo{
+      width:44px;height:44px;flex:0 0 44px;border-radius:8px;
+      background:transparent;display:none;align-items:center;justify-content:center;
     }
-    nav a {
-      margin: 0 1rem;
+    #mini-logo img{width:100%;height:100%;object-fit:contain;display:block}
+
+    header h1{
+      margin:0;
+      color:var(--accent);
+      font-size:1.4rem;
+      letter-spacing:0.4px;
+    }
+
+    nav{
+      margin-top:0;
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    nav a{
+      margin:0 0.5rem;
       color: #e0e0e0;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
+      text-decoration:none;
+      font-weight:500;
+      padding:6px 8px;
+      border-radius:6px;
+      transition: color .18s, background .12s, transform .12s;
     }
-    nav a:hover {
-      color: #00bfff;
+    nav a:focus{ outline:2px solid rgba(0,191,255,0.12); outline-offset:2px; }
+    nav a:hover{ color:var(--accent); background:var(--glass); transform:translateY(-1px); }
+
+    /* Dropdown */
+    .dropdown{ display:inline-block; position:relative; }
+    .dropbtn{
+      color: #e0e0e0; text-decoration:none; font-weight:500;
+      cursor:pointer; padding:6px 8px; border-radius:6px;
+      background:transparent; border:none;
     }
-    .dropdown {
-      display: inline-block;
-      position: relative;
+    .dropbtn:focus{ outline:2px solid rgba(0,191,255,0.12); }
+    .dropdown-content{
+      display:none; position:absolute; right:0; top:calc(100% + 10px);
+      background:var(--panel); min-width:200px; border-radius:8px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.6); overflow:hidden; z-index:1300;
     }
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background: #111;
-      min-width: 160px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-      z-index: 1000;
+    .dropdown-content a{
+      display:block; color:#e0e0e0; padding:12px 14px; text-decoration:none;
+      transition:background .12s, color .12s;
     }
-    .dropdown-content a {
-      color: #e0e0e0;
-      padding: 12px 16px;
-      display: block;
-      text-decoration: none;
+    .dropdown-content a:hover{ background:#111; color:var(--accent); }
+
+    /* Page sections */
+    .container{ max-width:1100px; margin:0 auto; padding:0 18px; }
+    section{ max-width:900px; margin:3.5rem auto; padding:2rem; background:var(--card);
+      border-radius:12px; box-shadow:0 8px 30px rgba(0,191,255,0.06);
+      transform:translateY(0); transition:transform .25s ease, box-shadow .25s ease, opacity .4s;
+      opacity:1;
     }
-    .dropdown-content a:hover {
-      background: #222;
+    section.reveal{ opacity:0; transform:translateY(20px); } /* initial before reveal */
+
+    h2{ color:var(--accent); margin-bottom:1rem; font-size:1.6rem; }
+    p{ margin-bottom:1rem; color: #dcdcdc; }
+
+    .quote-intro{ background:var(--panel); padding:20px; border-radius:10px; text-align:center;
+      box-shadow:0 8px 20px rgba(0,191,255,0.06); }
+
+    /* Form styling (inputs intentionally light for contrast + usability) */
+    .quote-form label{ display:block; margin:10px 0 6px; font-weight:600; color:#ddd; }
+    .quote-form input, .quote-form select, .quote-form textarea{
+      width:100%; padding:10px; margin-bottom:14px; border-radius:8px; border:1px solid rgba(255,255,255,0.08);
+      background:#fff; color:#000; box-sizing:border-box; font-size:0.98rem;
     }
-    section {
-      max-width: 900px;
-      margin: 4rem auto;
-      padding: 2rem;
-      background: #1a1a1a;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0, 191, 255, 0.1);
-      transition: transform 0.2s;
+    .quote-form textarea{ min-height:110px; resize:vertical; }
+
+    .helper-line{ font-size:0.88rem; color:var(--muted); margin-top:-10px; margin-bottom:12px; }
+
+    .controls-row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+    .controls-row > *{ flex:1 1 180px; }
+
+    .quote-form button{
+      background:var(--accent); color:#fff; border:none; padding:12px 22px; border-radius:8px;
+      cursor:pointer; font-weight:600; font-size:1rem; transition:transform .12s, opacity .12s;
     }
-    section:hover {
-      transform: translateY(-3px);
+    .quote-form button:disabled{ opacity:0.6; cursor:not-allowed; transform:scale(.995); }
+
+    /* contact inputs (hidden until chosen) */
+    .contact-input { display:none; }
+
+    /* overlay on submit */
+    #submittingOverlay{
+      position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+      background:rgba(3,5,7,0.6); z-index:1400;
     }
-    h2 {
-      color: #00bfff;
-      margin-bottom: 1rem;
+    .spinner{
+      width:84px;height:84px;border-radius:12px;background:var(--card);display:flex;align-items:center;
+      justify-content:center;box-shadow:0 12px 40px rgba(0,0,0,0.6);
     }
-    p {
-      margin-bottom: 1rem;
-    }
-    .quote-intro {
-      background: #111;
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 2rem;
-      text-align: center;
-      box-shadow: 0 0 15px rgba(0, 191, 255, 0.1);
-    }
-    .quote-form label {
-      display: block;
-      margin: 10px 0 5px;
-      font-weight: bold;
-    }
-    .quote-form input, .quote-form select, .quote-form textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-    .quote-form button {
-      background: #00bfff;
-      color: white;
-      padding: 12px 25px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background 0.3s;
-    }
-    .quote-form button:hover {
-      background: #008cba;
-    }
-    footer {
-      text-align: center;
-      padding: 2rem;
-      background: #111;
-      font-size: 0.9rem;
-      color: #aaa;
-      margin-top: 3rem;
+    .dot{ width:12px;height:12px;border-radius:50%; background:var(--accent); margin:0 6px; opacity:0;
+      animation:dot .9s infinite; }
+    .dot:nth-child(2){ animation-delay:.12s; }
+    .dot:nth-child(3){ animation-delay:.24s; }
+    @keyframes dot{ 0%{ transform:translateY(-6px); opacity:0; } 50%{ transform:translateY(0); opacity:1 } 100%{ transform:translateY(6px); opacity:0 } }
+
+    footer{ text-align:center; padding:2rem; background:var(--panel); color:var(--muted); margin-top:3rem; }
+
+    /* responsive */
+    @media (max-width:720px){
+      header .inner{padding:0 8px;}
+      section{ margin:2.5rem 12px; }
+      nav a{ font-size:0.95rem; padding:6px 8px; }
+      .dropdown-content{ right:8px; left:auto; min-width:140px; }
     }
   </style>
 </head>
 <body>
+  <header>
+    <div class="inner container" role="banner">
+      <div id="mini-logo" aria-hidden="true"><img src="images/logo.png" alt="JJ's Custom PCs logo"></div>
+      <h1>JJ's Custom PCs</h1>
 
-<header>
-  <h1>JJ's Custom PCs</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="services.html">Services</a>
-    <a href="contact.html">Contact</a>
+      <nav role="navigation" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
 
-    <!-- Info Dropdown -->
-    <div class="dropdown">
-      <a href="#" class="dropbtn">Info &#9662;</a>
-      <div class="dropdown-content">
-        <a href="legal.html">Terms & Conditions</a>
+        <div class="dropdown" style="margin-left:10px;">
+          <button class="dropbtn" aria-haspopup="true" aria-expanded="false" aria-controls="info-menu">Info ▾</button>
+          <div class="dropdown-content" id="info-menu" role="menu" aria-hidden="true">
+            <a href="legal.html" role="menuitem">Terms &amp; Conditions</a>
+            <a href="faq.html" role="menuitem">FAQ</a>
+            <a href="warranty.html" role="menuitem">Warranty Info</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="quote-intro reveal">
+      <h2>Welcome to JJ's Custom PCs!</h2>
+      <p>Whether you're looking for a high-performance gaming rig, a budget-friendly workstation, or just need guidance on building the perfect PC, you're in the right place. Fill out the quote form and I’ll get back with a personalized plan.</p>
+      <p class="helper-line">Tip: choose how you'd like me to contact you — I won't ask for both unless you want me to.</p>
+    </section>
+
+    <section class="reveal" id="quote-section" aria-labelledby="quote-title">
+      <h2 id="quote-title">Request a Free Quote</h2>
+
+      <div class="quote-form" role="form" aria-labelledby="quote-title">
+        <form id="quote-form" action="https://formsubmit.co/a3b58795bc0ec2a0644d6798de47715b" method="POST" autocomplete="on">
+          <input type="hidden" name="_next" value="https://jjscustompcs.github.io/0/thankyou.html">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+          <input type="hidden" name="_timestamp" id="ts">
+
+          <label for="name">Full Name</label>
+          <input id="name" name="name" type="text" placeholder="Your name" required>
+
+          <label for="contact-method">Preferred contact method</label>
+          <select id="contact-method" name="contact_method" required aria-required="true">
+            <option value="">— Choose —</option>
+            <option value="email">Email</option>
+            <option value="phone">Phone</option>
+          </select>
+
+          <div id="contact-inputs">
+            <div id="contact-email" class="contact-input">
+              <label for="email">Email address</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" inputmode="email" />
+            </div>
+
+            <div id="contact-phone" class="contact-input">
+              <label for="phone">Phone number</label>
+              <input id="phone" name="phone" type="tel" placeholder="(555) 555-5555" inputmode="tel" />
+            </div>
+          </div>
+
+          <label for="build-type">Build Type</label>
+          <select id="build-type" name="build-type">
+            <option value="general">General (Budget + Needs)</option>
+            <option value="specific">Specific (Parts List)</option>
+          </select>
+
+          <div id="general-fields">
+            <label for="budget">Budget ($)</label>
+            <input id="budget" name="budget" type="number" placeholder="e.g. 1000">
+
+            <label for="use-case">Use Case</label>
+            <select id="use-case" name="use-case">
+              <option>Gaming</option>
+              <option>Video Editing</option>
+              <option>Streaming</option>
+              <option>General Use</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div id="specific-fields" style="display:none;">
+            <label for="parts">Parts List</label>
+            <textarea id="parts" name="parts" placeholder="Paste your parts list here..."></textarea>
+          </div>
+
+          <div style="margin:10px 0 18px; color:var(--muted); font-size:.95rem;">
+            <label style="display:inline-flex; align-items:center; gap:8px;">
+              <input id="agree" name="agree" type="checkbox" required>
+              <span>I agree to the <a href="legal.html" style="color:var(--accent)">Terms &amp; Conditions</a>.</span>
+            </label>
+          </div>
+
+          <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+            <button id="submitBtn" type="submit">Submit Quote Request</button>
+            <button type="button" id="restoreBtn" style="background:transparent; color:var(--muted); border:1px solid rgba(255,255,255,0.04); padding:10px 14px; border-radius:8px;">
+              Restore Draft
+            </button>
+            <div id="draftHint" style="color:var(--muted); font-size:.9rem; margin-left:auto;"></div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 JJ's Custom PCs. All Rights Reserved. | <a href="privacy.html" style="color:var(--accent); text-decoration:none">Privacy Policy</a></p>
+    </div>
+  </footer>
+
+  <div id="submittingOverlay" aria-hidden="true">
+    <div class="spinner" role="status" aria-live="polite" aria-label="Submitting">
+      <div style="text-align:center;">
+        <div style="display:flex; align-items:center;">
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+        <div style="margin-top:12px; color:var(--muted); font-size:.95rem;">Sending your request…</div>
       </div>
     </div>
-  </nav>
-</header>
-
-<section class="quote-intro">
-  <h2>Welcome to JJ's Custom PCs!</h2>
-  <p>Whether you're looking for a high-performance gaming rig, a budget-friendly workstation, or just need guidance on building the perfect PC, you're in the right place. Fill out the quote form below and let me know your goals — I’ll handle the rest!</p>
-</section>
-
-<section>
-  <h2>Get a Free Quote</h2>
-  <div class="quote-form">
-    <form action="https://formsubmit.co/a3b58795bc0ec2a0644d6798de47715b" method="POST">
-      <input type="hidden" name="_next" value="https://jjscustompcs.github.io/0/thankyou.html">
-      <input type="hidden" name="_captcha" value="false">
-
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" placeholder="Your Name" required>
-
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" placeholder="Your Email" required>
-
-      <label for="build-type">Build Type:</label>
-      <select id="build-type" name="build-type">
-        <option value="general">General (Budget + Needs)</option>
-        <option value="specific">Specific (Parts List)</option>
-      </select>
-
-      <div id="general-fields">
-        <label for="budget">Budget ($):</label>
-        <input type="number" id="budget" name="budget" placeholder="Enter your budget">
-
-        <label for="use-case">Use Case:</label>
-        <select id="use-case" name="use-case">
-          <option>Gaming</option>
-          <option>Video Editing</option>
-          <option>Streaming</option>
-          <option>General Use</option>
-          <option>Other</option>
-        </select>
-      </div>
-
-      <div id="specific-fields" style="display:none;">
-        <label for="parts">Parts List:</label>
-        <textarea id="parts" name="parts" rows="6" placeholder="Paste your parts list here..."></textarea>
-      </div>
-
-      <button type="submit">Submit Quote Request</button>
-    </form>
   </div>
-</section>
 
-<footer>
-  <p>© 2025 JJ's Custom PCs. All Rights Reserved.</p>
-</footer>
+  <script>
+    // ---- utilities ----
+    const $ = s => document.querySelector(s);
+    const $$ = s => document.querySelectorAll(s);
 
-<script>
-  // Toggle build type fields
-  const buildType = document.getElementById('build-type');
-  const generalFields = document.getElementById('general-fields');
-  const specificFields = document.getElementById('specific-fields');
+    // restore mini-logo on scroll
+    const miniLogo = $('#mini-logo');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        miniLogo.style.display = 'flex';
+      } else {
+        miniLogo.style.display = 'none';
+      }
+    });
 
-  buildType.addEventListener('change', () => {
-    if (buildType.value === 'general') {
-      generalFields.style.display = 'block';
-      specificFields.style.display = 'none';
-    } else {
-      generalFields.style.display = 'none';
-      specificFields.style.display = 'block';
-    }
-  });
+    // Reveal on scroll (IntersectionObserver)
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.remove('reveal');
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
 
-  // Dropdown menu
-  const dropdown = document.querySelector('.dropdown');
-  const dropdownContent = dropdown.querySelector('.dropdown-content');
+    document.querySelectorAll('section.reveal').forEach(s => io.observe(s));
 
-  dropdown.addEventListener('mouseenter', () => {
-    dropdownContent.style.display = 'block';
-  });
+    // Build type toggle
+    const buildType = $('#build-type');
+    const generalFields = $('#general-fields');
+    const specificFields = $('#specific-fields');
+    buildType.addEventListener('change', () => {
+      if (buildType.value === 'specific') {
+        generalFields.style.display = 'none';
+        specificFields.style.display = 'block';
+      } else {
+        generalFields.style.display = 'block';
+        specificFields.style.display = 'none';
+      }
+    });
 
-  dropdown.addEventListener('mouseleave', () => {
-    dropdownContent.style.display = 'none';
-  });
-</script>
+    // Contact method toggle
+    const contactMethod = $('#contact-method');
+    const contactEmail = $('#contact-email');
+    const contactPhone = $('#contact-phone');
+    contactMethod.addEventListener('change', () => {
+      contactEmail.style.display = contactMethod.value === 'email' ? 'block' : 'none';
+      contactPhone.style.display = contactMethod.value === 'phone' ? 'block' : 'none';
+    });
 
+    // ---- dropdown fix ----
+    (function initDropdown(){
+      const dropdown = document.querySelector('.dropdown');
+      const btn = dropdown.querySelector('.dropbtn');
+      const menu = dropdown.querySelector('.dropdown-content');
+
+      function openMenu(){ 
+        menu.style.display='block'; 
+        btn.setAttribute('aria-expanded','true'); 
+        menu.setAttribute('aria-hidden','false'); 
+      }
+      function closeMenu(){ 
+        menu.style.display='none'; 
+        btn.setAttribute('aria-expanded','false'); 
+        menu.setAttribute('aria-hidden','true'); 
+      }
+
+      dropdown.addEventListener('mouseenter', openMenu);
+      dropdown.addEventListener('mouseleave', () => {
+        setTimeout(() => {
+          if (!dropdown.matches(':hover')) closeMenu();
+        }, 150);
+      });
+
+      btn.addEventListener('click', (e)=>{
+        e.preventDefault();
+        if (menu.style.display === 'block') closeMenu(); else openMenu();
+      });
+
+      btn.addEventListener('keydown', (e)=>{
+        if (e.key === 'Enter' || e.key === ' ') { 
+          e.preventDefault(); 
+          if (menu.style.display === 'block') closeMenu(); else openMenu(); 
+        }
+        if (e.key === 'Escape') closeMenu();
+      });
+
+      document.addEventListener('click', (ev) => {
+        if (!dropdown.contains(ev.target)) closeMenu();
+      });
+    })();
+
+    // ---- form submission fix ----
+    const form = $('#quote-form');
+    const overlay = $('#submittingOverlay');
+    const submitBtn = $('#submitBtn');
+
+    form.addEventListener('submit', (e) => {
+      $('#ts').value = Math.floor(Date.now()/1000);
+
+      const method = contactMethod.value;
+      if (method === '') {
+        alert('Please choose a preferred contact method (Email or Phone).');
+        e.preventDefault();
+        return;
+      }
+      if (method === 'email' && !$('#email').value.trim()){
+        alert('Please provide your email address so we can contact you.');
+        e.preventDefault();
+        return;
+      }
+      if (method === 'phone' && !$('#phone').value.trim()){
+        alert('Please provide your phone number so we can contact you.');
+        e.preventDefault();
+        return;
+      }
+
+      overlay.style.display = 'flex';
+      submitBtn.disabled = true;
+
+      try { localStorage.removeItem('quoteDraft'); } catch(e){}
+
+      setTimeout(() => {
+        if (submitBtn) { submitBtn.disabled = false; overlay.style.display = 'none'; }
+      }, 12000);
+    });
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
