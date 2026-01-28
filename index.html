@@ -136,6 +136,18 @@
     /* contact inputs (hidden until chosen) */
     .contact-input { display:none; }
 
+    /* Terms & Conditions checkbox row */
+    .terms-row{
+      margin:10px 0 18px;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+    .terms-row label{
+      display:inline-flex;          /* compact on desktop */
+      align-items:center;
+      gap:8px;
+    }
+
     /* overlay on submit */
     #submittingOverlay{
       position:fixed; inset:0; display:none; align-items:center; justify-content:center;
@@ -186,6 +198,19 @@
       }
       .container{
         padding:0 12px;
+      }
+
+      /* mobile behavior for terms row */
+      .terms-row label{
+        display:flex;
+        align-items:flex-start;
+        gap:10px;
+      }
+      .terms-row input{
+        margin-top:4px;
+      }
+      .terms-row span{
+        line-height:1.4;
       }
     }
   </style>
@@ -277,13 +302,14 @@
             <textarea id="parts" name="parts" placeholder="Paste your parts list here..."></textarea>
           </div>
 
-<div style="margin:10px 0 18px; color:var(--muted); font-size:.95rem;">
-  <label style="display:inline-flex; align-items:center; gap:8px;">
-    <input id="agree" name="agree" type="checkbox" required>
-    <span>I agree to the <a href="legal.html" style="color:var(--accent)">Terms &amp; Conditions</a>.</span>
-  </label>
-</div>
-
+          <div class="terms-row">
+            <label>
+              <input id="agree" name="agree" type="checkbox" required>
+              <span>
+                I agree to the <a href="legal.html" style="color:var(--accent)">Terms &amp; Conditions</a>.
+              </span>
+            </label>
+          </div>
 
           <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
             <button id="submitBtn" type="submit">Submit Quote Request</button>
