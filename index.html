@@ -44,7 +44,7 @@
       max-width:1100px;
       display:flex;
       align-items:center;
-      justify-content:center;
+      justify-content:space-between; /* logo/title left, nav right on wider screens */
       gap:12px;
     }
     /* mini-logo (hidden until scroll) */
@@ -66,6 +66,7 @@
       display:flex;
       gap:8px;
       align-items:center;
+      flex-wrap:wrap; /* lets links wrap instead of breaking layout */
     }
     nav a{
       margin:0 0.5rem;
@@ -154,10 +155,38 @@
 
     /* responsive */
     @media (max-width:720px){
-      header .inner{padding:0 8px;}
-      section{ margin:2.5rem 12px; }
-      nav a{ font-size:0.95rem; padding:6px 8px; }
-      .dropdown-content{ right:8px; left:auto; min-width:140px; }
+      header{
+        padding:0.75rem 1rem;
+      }
+      header .inner{
+        padding:0 8px;
+        flex-direction:column;        /* stack title + nav on mobile */
+        align-items:flex-start;
+        gap:6px;
+      }
+      header h1{
+        font-size:1.2rem;
+      }
+      nav{
+        width:100%;
+        justify-content:flex-start;
+        gap:4px;
+      }
+      nav a{
+        font-size:0.9rem;
+        padding:4px 6px;
+        margin:0;
+      }
+      section{
+        margin:2.0rem 8px;
+        padding:1.5rem 1.25rem;
+      }
+      .quote-intro{
+        text-align:left;
+      }
+      .container{
+        padding:0 12px;
+      }
     }
   </style>
 </head>
@@ -269,7 +298,7 @@
 
   <footer>
     <div class="container">
-      <p>© 2025 JJ's Custom PCs. All Rights Reserved. | <a href="privacy.html" style="color:var(--accent); text-decoration:none">Privacy Policy</a></p>
+      <p>© 2026 JJ's Custom PCs. All Rights Reserved. | <a href="privacy.html" style="color:var(--accent); text-decoration:none">Privacy Policy</a></p>
     </div>
   </footer>
 
@@ -415,4 +444,5 @@
   </script>
 </body>
 </html>
+
 
